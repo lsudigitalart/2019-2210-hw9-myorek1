@@ -17,8 +17,8 @@ var bullet;
 var p1x = 0; 
 var p1y =350;
 
-var bx;
-var by;
+var bx = p1x;
+var by = p1y;
 
 var music;
 
@@ -61,7 +61,7 @@ function player1(){
       
     image(player, p1x, p1y, player.width/2, player.height/2)
 
-
+/*
     function bullets(){
 
         bx = p1x + 80;
@@ -73,9 +73,9 @@ function player1(){
             }
         }
         image(bullet, bx, by, bullet.width/2, bullet.height/2)
-    }
+    }*/
 
-    bullets();
+
 }
 
 
@@ -95,13 +95,15 @@ createCanvas (1000,800);
 myPlane1 = new Plane(planes[0],1.5,20);
 myPlane2 = new Plane(planes[1],2,220);
 myPlane3 = new Plane(planes[2],1.8,440);
-myPlane4 = new Plane(planes[3],1.3,640);
+myPlane4 = new Plane(planes[3],1.3,640);``
 
 mycloud1 = new Cloud(clouds[0],-1,1000,200);
 mycloud2 = new Cloud(clouds[1],-1,800,30);
 mycloud3 = new Cloud(clouds[2],-1,500,500);
 mycloud4 = new Cloud(clouds[0],-1,700,700);
 mycloud5 = new Cloud(clouds[1],-1,300,600);
+
+mybullet = new Bullets(bullet, 7);
 
 }
 
@@ -196,6 +198,10 @@ myPlane3.update();
 myPlane4.display();
 myPlane4.update();
 
+mybullet.display();
+mybullet.update();
+mybullet.interact();
+
 }
 
 // cloud object 
@@ -247,5 +253,54 @@ function Plane(tempPlaneImage, tempSpeed, tempY) {
 
     this.interact = function(){
 
+    }  
+}
+
+// bullet
+function Bullets(tempBulletImage, tempSpeed) {
+
+    this.BulletImage = tempBulletImage;
+    this.speed = tempSpeed;
+    this.yPos = by + 40;
+    this.xPos = bx + 80;
+    
+  
+    this.display = function(){
+
+       image(this.BulletImage,this.xPos,this.yPos,this.BulletImage.width/2, this.BulletImage.height/2)
+
     }
+
+    this.update = function(){
+
+    
+      
+//resets x position 
+        if (this.xPos > 1000)
+        this.xPos = 0;
+    }
+
+
+
+    this.interact = function(){
+
+        if (keyIsPressed== true) {
+            if (keyCode == LEFT_ARROW) {
+            this.xPos = this.xPos-3;
+            }
+            else if (keyCode == RIGHT_ARROW) {
+            this.xPos = this.xPos+3;
+            }
+            else if (keyCode == UP_ARROW){
+                this.yPos = this.yPos-3;
+            }
+            else if (keyCode == DOWN_ARROW){
+                this.yPos = this.yPos+3;
+            }
+
+                if(keyCode == ENTER){
+                    this.xPos = this.xPos + this.speed;
+                }
+            }
+        }
 }
