@@ -161,6 +161,11 @@ function draw() {
     fill(146);
     rect(0,690,1000,30)
 
+
+textSize(25)
+text('Press enter to shoot.', 710, 30);
+text('Use arrow keys to move plane.', 650, 60);
+
 player1();
 
 
@@ -297,10 +302,11 @@ function Bullets(tempBulletImage, tempSpeed) {
             else if (keyCode == DOWN_ARROW){
                 this.yPos = this.yPos+3;
             }
-
-                if(keyCode == ENTER){
-                    this.xPos = this.xPos + this.speed;
-                }
+               
             }
+            if(keyCode == ENTER){
+                this.xPos = this.xPos + this.speed;
+            }
+
         }
 }
